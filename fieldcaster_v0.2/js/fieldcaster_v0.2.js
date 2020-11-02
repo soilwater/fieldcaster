@@ -14,12 +14,24 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Read climate data
 let climateInputElement = document.getElementById("climateInput");
-climateInputElement.addEventListener('change', readClimateData, false);
+climateInputElement.addEventListener('change', function (){
+    try{
+        readClimateData()
+    } catch(err){
+        document.getElementById("errorModalMsg").innerHTML = err.message;
+    }
+}, false);
 
 
 // Read weather data
 let weatherInputElement = document.getElementById("weatherInput");
-weatherInputElement.addEventListener('change', readWeatherData, false);
+weatherInputElement.addEventListener('change', function(){
+    try{
+        readWeatherData()
+    } catch(err){
+        document.getElementById("errorModalMsg").innerHTML = err.message;
+    }
+}, false);
 
 
 // Input box latitude
@@ -285,11 +297,13 @@ function readClimateData (){
 
         // Start from second array. First array is for the headers
         for(let i=1; i<lines.length; i++){
-            let values = lines[i].split(',');
-            climate.push( { year:parseInt(values[0]), month:parseInt(values[1]), day:parseInt(values[2]), 
-                            tempMax:parseFloat(values[3]), tempMin:parseFloat(values[4]), 
-                            rhMax:parseFloat(values[5]), rhMin:parseFloat(values[6]),
-                            precip:parseFloat(values[7]), solarRad:parseFloat(values[8]), windSpeed:parseFloat(values[9])} );
+            if(lines[i].length > 0){
+                let values = lines[i].split(',');
+                climate.push( { year:parseInt(values[0]), month:parseInt(values[1]), day:parseInt(values[2]), 
+                    tempMax:parseFloat(values[3]), tempMin:parseFloat(values[4]), 
+                    rhMax:parseFloat(values[5]), rhMin:parseFloat(values[6]),
+                    precip:parseFloat(values[7]), solarRad:parseFloat(values[8]), windSpeed:parseFloat(values[9])} );
+            }
         };
         for(let i=0; i<climate.length; i++){ climate[i].tempAvg = (climate[i].tempMax + climate[i].tempMin)/2}
         for(let i=0; i<climate.length; i++){ climate[i].date = new Date(climate[i].year, climate[i].month-1, climate[i].day) }
@@ -319,20 +333,23 @@ function readWeatherData (){
 
         // Start from second array. First array is for the headers
         for(let i=1; i<lines.length; i++){
-            let values = lines[i].split(',');
-            weather.push( { year:parseInt(values[0]), month:parseInt(values[1]), day:parseInt(values[2]), 
-                            tempMax:parseFloat(values[3]), tempMin:parseFloat(values[4]), 
-                            rhMax:parseFloat(values[5]), rhMin:parseFloat(values[6]),
-                            precip:parseFloat(values[7]), solarRad:parseFloat(values[8]), windSpeed:parseFloat(values[9]),
-                            irrigation: parseFloat(values[10]), surfaceSoilWaterObs:parseFloat(values[11]), 
-                            rootzoneSoilWaterObs:parseFloat(values[12]), canopyCoverObs:parseFloat(values[13]) } )
+            if(lines[i].length > 0){
+                let values = lines[i].split(',');
+                weather.push( { year:parseInt(values[0]), month:parseInt(values[1]), day:parseInt(values[2]), 
+                                tempMax:parseFloat(values[3]), tempMin:parseFloat(values[4]), 
+                                rhMax:parseFloat(values[5]), rhMin:parseFloat(values[6]),
+                                precip:parseFloat(values[7]), solarRad:parseFloat(values[8]), windSpeed:parseFloat(values[9]),
+                                irrigation: parseFloat(values[10]), surfaceSoilWaterObs:parseFloat(values[11]), 
+                                rootzoneSoilWaterObs:parseFloat(values[12]), canopyCoverObs:parseFloat(values[13]) } )
+            }
         }
+
         for(let i=0; i<weather.length; i++){ weather[i].tempAvg = (weather[i].tempMax + weather[i].tempMin)/2}
         for(let i=0; i<weather.length; i++){ weather[i].date = new Date(weather[i].year, weather[i].month-1, weather[i].day) }
         for(let i=0; i<weather.length; i++){ weather[i].doy = getDayOfYear(weather[i].date) }
         for(let i=0; i<weather.length; i++){ weather[i].ETref = computeReferenceET(geolocation, weather[i], 'grass')}
 
-        M.toast({html: 'Weather loaded!'})
+        M.toast({html: 'Observations loaded!'})
         e.target.value = '';
 
         let startDate =  timestamp(weather[0].year, weather[0].month, weather[0].day);
