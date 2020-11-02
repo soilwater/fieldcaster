@@ -698,7 +698,7 @@ function createPlots(){
     Plotly.newPlot('plotSoilWater', outputs.soilWater, { yaxis: {title: "Rootzone Soil Water (mm)"}, autosize: true, showlegend: false, hovermode:'closest' }, modeBarBtns);
     Plotly.newPlot('plotPrecipCumulative', outputs.precipCumulative, { yaxis: {title: "Cumulative Precipitation (mm)"}, autosize: true, showlegend: false }, modeBarBtns);
     Plotly.newPlot('plotETcropCumulative', outputs.ETcropCumulative, { yaxis: {title: "Cumulative Actual ET (mm)"}, autosize: true, showlegend: false, hovermode:'closest' }, modeBarBtns);
-    Plotly.newPlot('plotGrainYield', [{x:outputs.grainYield,type:'histogram', histnorm:'probability'}], { xaxis: {title: "Estimated Grain Yield (Mg/ha"}, yaxis: {title: "Probability"}, autosize: true, showlegend: false }, modeBarBtns),
+    Plotly.newPlot('plotGrainYield', [{x:outputs.grainYield,type:'histogram', histnorm:'probability'}], { xaxis: {title: "Estimated Grain Yield (Mg/ha)"}, yaxis: {title: "Probability"}, autosize: true, showlegend: false }, modeBarBtns),
     Plotly.newPlot('plotCanopyCover', outputs.canopyCover, { yaxis: {title: "Canopy Cover"}, autosize: true, showlegend: false, hovermode:'closest' }, modeBarBtns);
     Plotly.newPlot('plotThermalUnits', outputs.thermalUnitsCumulative, { yaxis: {title: "Thermal Units (C-day)"}, autosize: true, showlegend: false }, modeBarBtns);
 
