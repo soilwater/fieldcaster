@@ -478,6 +478,7 @@ function fieldcaster(){
             let grainYield;
             let simulationDate;
             let isDormant = false;
+            let vernDays = 0;
 
             // Compute constant evaporation variables
             TEW = 1000 * (soil.upperLimit - 0.5*soil.lowerLimit) * soil.surfaceDepth; // Eq. 73, FAO-56 total evaporable water (Renamed TEW for potential)
@@ -579,6 +580,7 @@ function fieldcaster(){
                     } else {
                         Kcb[n] = Math.min( plant.KcMin + fc[n]/100*(plant.KcbFull - plant.KcMin), plant.KcbFull);
                     }
+                    
                     if(Kcb[n] > 0.45){ Kcb[n] = (Kcb[n] + [0.04 * (windSpeed[n] - 2) - 0.004*(rhMin[n]-45)] * (h[n]/3)**0.3) }; // FAO Eq. 70. Correct tabulated Kcb by local conditions
                     KcMax = Math.max((1.2 + [0.04 * (windSpeed[n] - 2) - 0.004*(rhMin[n] - 45)] * (h[n]/3)**0.3), Kcb[n] + 0.05); // Eq. 72, FAO-56
                     few = Math.min(1 - fc[n]/100, soil.wettedFraction);
