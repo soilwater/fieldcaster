@@ -12,7 +12,7 @@
     <style>
         p{font-size: 1.2rem; color: rgb(20, 20, 20);}
         .title{font-size: 2rem; font-weight:600; color: rgb(65, 65, 65);}
-        nav{height: 50px;}
+        nav{height: 55px;}
         div.sticky {
             position: -webkit-sticky;
             position: sticky !important;
@@ -22,7 +22,7 @@
 </head>
 <body>
     <div class="navbar-fixed">
-        <nav class=" indigo darken-2">
+        <nav class=" indigo darken-1">
             <div class="nav-wrapper container valign-wrapper">
             <div style="font-size: 1.8rem;">SCENARIO docs</div>
             </div>
@@ -34,7 +34,8 @@
                 <div id="how-to-use-it" class="section scrollspy">
                     <h1 class="title">How to use it</h1>
                     <p>
-                        Fieldcaster is a soil water balance model based on the widely accepted FAO-56 dual crop coefficient method (Allen et al 1998). Fieldcaster generates forecasts of the soil water balance using plausible scenarios based on environmental conditions of the ongogin growing season and historical climate records. This approach departs from existing crop models that typically allow for modeling one scenario at the time.
+                        SCEMARIO is a soil water balance model based on the widely accepted FAO-56 dual crop coefficient method (Allen et al 1998). 
+                        The model generates an ensemble forecasts of the soil water balance using plausible scenarios based on environmental conditions of the ongogin growing season and historical climate records. This approach departs from existing crop models that typically allow for modeling one scenario at the time.
                         The core of the model was implemented in pure, functional Javascript and has no external dependencies. This approach makes Fieldcaster lightweight (only 48 KB) and extremely fast, taking about 100 milliseconds to generate forecasts based on 20 years of climate data. The web interface relies on few external open source libraries such as Materialize CSS for styling, Plotly for generating interactive graphs, and noUiSlider for interactive controls.
                         Fieldcaster is a portmanteau between the words "Field" and "Forecaster"
 
@@ -89,6 +90,11 @@
 
                 <div id="data-assimilation" class="section scrollspy">
                     <h1 class="title">Data Assimilation</h1>
+                    <p>Content </p>
+                </div>
+
+                <div id="data-assimilation" class="section scrollspy">
+                    <h1 class="title">References</h1>
                     <p>Content </p>
                 </div>
 
