@@ -123,14 +123,14 @@ thetaInitialRootzoneSlider.noUiSlider.on('update', function (values, handle) { t
 let lowerLimitSlider = document.getElementById('lowerLimit');
 let lowerLimitSliderValue = document.getElementById('lowerLimitSliderValue');
 noUiSlider.create(lowerLimitSlider, { start: 0.15, range: {'min': 0, 'max': 0.25}, step: 0.01, format: wNumb({decimals: 2}) });
-lowerLimitSlider.noUiSlider.on('update', function (values, handle) { lowerLimitSliderValue.innerHTML = 'Lower Limit (m3/m3): ' + values[handle]; });
+lowerLimitSlider.noUiSlider.on('update', function (values, handle) { lowerLimitSliderValue.innerHTML = 'Lower Limit (m<sup>3</sup>/m<sup>3</sup>): ' + values[handle]; });
 
 
 // Slider upper limit
 let upperLimitSlider = document.getElementById('upperLimit');
 let upperLimitSliderValue = document.getElementById('upperLimitSliderValue');
 noUiSlider.create(upperLimitSlider, { start: 0.31, range: {'min': 0.25, 'max': 0.5}, step: 0.01, format: wNumb({decimals: 2}) });
-upperLimitSlider.noUiSlider.on('update', function (values, handle) { upperLimitSliderValue.innerHTML = 'Upper Limit (m3/m3): ' + values[handle]; });
+upperLimitSlider.noUiSlider.on('update', function (values, handle) { upperLimitSliderValue.innerHTML = 'Upper Limit (m<sup>3</sup>/m<sup>3</sup>): ' + values[handle]; });
 
 
 // Slider residue cover
@@ -150,7 +150,7 @@ wettedFractionSlider.noUiSlider.on('update', function (values, handle) { wettedF
 // Slider curve number
 let curveNumberSlider = document.getElementById('curveNumber');
 let curveNumberSliderValue = document.getElementById('curveNumberSliderValue');
-noUiSlider.create(curveNumberSlider, { start: 70, range: {'min': 1, 'max': 100}, step: 1, format: wNumb({decimals: 0}) });
+noUiSlider.create(curveNumberSlider, { start: 85, range: {'min': 50, 'max': 100}, step: 1, format: wNumb({decimals: 0}) });
 curveNumberSlider.noUiSlider.on('update', function (values, handle) { curveNumberSliderValue.innerHTML = 'Curve Number: ' + values[handle]; });
 
 
@@ -181,17 +181,17 @@ for (var i = 0; i < stagesDurationConnect.length; i++) {
 
 
 // Slider Kc Min
-let KcMinSlider = document.getElementById('KcMin');
-let KcMinSliderValue = document.getElementById('KcMinSliderValue');
-noUiSlider.create(KcMinSlider, { start: 0.15, range: {'min': 0, 'max': 0.3}, step:0.01, format: wNumb({decimals: 2}) });
-KcMinSlider.noUiSlider.on('update', function (values, handle) {KcMinSliderValue.innerHTML = 'Kc min: ' + values[handle]; });
+let KcbIniSlider = document.getElementById('KcbIni');
+let KcbIniSliderValue = document.getElementById('KcbIniSliderValue');
+noUiSlider.create(KcbIniSlider, { start: 0.15, range: {'min': 0, 'max': 0.3}, step:0.01, format: wNumb({decimals: 2}) });
+KcbIniSlider.noUiSlider.on('update', function (values, handle) {KcbIniSliderValue.innerHTML = 'Kcb Ini: ' + values[handle]; });
 
 
 // Slider Kcb Full
 let KcbFullSlider = document.getElementById('KcbFull');
 let KcbFullSliderValue = document.getElementById('KcbFullSliderValue');
 noUiSlider.create(KcbFullSlider, { start: 1.15, range: {'min': 0.7, 'max': 1.3}, step:0.01, format: wNumb({decimals: 2}) });
-KcbFullSlider.noUiSlider.on('update', function (values, handle) { KcbFullSliderValue.innerHTML = 'Kcb full: ' + values[handle]; });
+KcbFullSlider.noUiSlider.on('update', function (values, handle) { KcbFullSliderValue.innerHTML = 'Kcb Full: ' + values[handle]; });
 
 
 // Slider base temperature
@@ -246,7 +246,7 @@ pTabSlider.noUiSlider.on('update', function (values, handle) { pTabSliderValue.i
 // Slider canopy growth coefficient
 let canopyGrowthRateSlider = document.getElementById('canopyGrowthRate');
 let canopyGrowthRateSliderValue = document.getElementById('canopyGrowthRateSliderValue');
-noUiSlider.create(canopyGrowthRateSlider, { start: 0.0040, range: {'min': 0.0010, 'max': 0.0080}, step: 0.0001, format: wNumb({decimals: 4}) });
+noUiSlider.create(canopyGrowthRateSlider, { start: 0.0035, range: {'min': 0.0010, 'max': 0.0080}, step: 0.0001, format: wNumb({decimals: 4}) });
 canopyGrowthRateSlider.noUiSlider.on('update', function (values, handle) { canopyGrowthRateSliderValue.innerHTML = 'Canopy Growth Rate: ' + values[handle]; });
 
 
@@ -383,7 +383,7 @@ function run(){
 
 ///// COLLECT UP MODEL INPUTS /////
 function collectModelInputs(){
-    plant = {KcMin: parseFloat(KcMinSlider.noUiSlider.get()),
+    plant = {KcbIni: parseFloat(KcbIniSlider.noUiSlider.get()),
             KcbFull: parseFloat(KcbFullSlider.noUiSlider.get()),
             baseTempeature: parseFloat(baseTempSlider.noUiSlider.get()),
             upperTempeature: parseFloat(upperTempSlider.noUiSlider.get()),
@@ -547,7 +547,7 @@ function fieldcaster(){
                     if (De[n] < REW) {Kr = 1} else {Kr = (TEW - De[n])/(TEW - REW)} // Eq. 74, FAO-56, evaporation reduction coefficient
                     DPe[n]= Math.max(0, (precip[n]-RO[n]) + irrigation/soil.wettedFraction - De[n]); // Eq. 79, FAO-56
                     fc[n] = 0;
-                    Kcb[n] = plant.KcMin + fc[n]*plant.KcbFull;
+                    Kcb[n] = plant.KcbIni + fc[n]*plant.KcbFull;
                     KcMax = Math.max((1.2 + [0.04 * (windSpeed[n] - 2) - 0.004*(rhMin[n]-45)] * (h[n]/3)**0.3), Kcb[n] + 0.05); // Eq. 72, FAO-56
                     few = Math.min(1 - fc[n], soil.wettedFraction);
                     Ke[n] = Math.min(Kr * (KcMax - Kcb[n]), few * KcMax); // Eq. 71, FAO-56, soil evaporation coefficient
@@ -593,9 +593,10 @@ function fieldcaster(){
                     }
 
                     if(isDormant){
-                        Kcb[n] = plant.KcMin;
+                        Kcb[n] = plant.KcbIni;
                     } else {
-                        Kcb[n] = Math.min( plant.KcMin + fc[n]/100*(plant.KcbFull - plant.KcMin), plant.KcbFull);
+                        //Kcb[n] = Math.min( plant.KcbIni + fc[n]/100*(plant.KcbFull - plant.KcbIni), plant.KcbFull);
+                        Kcb[n] = Math.min( plant.KcbIni + fc[n]/100*plant.KcbFull, plant.KcbFull);
                     }
                     
                     if(Kcb[n] > 0.45){ Kcb[n] = (Kcb[n] + [0.04 * (windSpeed[n] - 2) - 0.004*(rhMin[n]-45)] * (h[n]/3)**0.3) }; // FAO Eq. 70. Correct tabulated Kcb by local conditions

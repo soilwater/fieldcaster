@@ -28,10 +28,9 @@
 <body>
     <nav class="navbar z-depth-0 white" style="margin-top: 10px;">
         <div class="nav-wrapper">
-            <a href="#" class="brand-logo deep-purple-text text-darken-2" style="font-size: 3.5rem; padding-left: 20px;"><b>DualKc-Forecast</b></a>
+            <a href="#" class="brand-logo deep-purple-text text-darken-2" style="font-size: 3.5rem; padding-left: 20px;"><b>Fieldcaster</b></a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a href="" class="deep-purple-text text-darken-2">About</a></li>
-            <li><a href="fieldcaster_v0.2/docs/documentation.md" class="deep-purple-text text-darken-2">Docs</a></li>
+            <li><a href="fieldcaster_v0.2/docs/documentation.html" class="deep-purple-text text-darken-2">Docs</a></li>
             <li><a href="" class="deep-purple-text text-darken-2">Github</a></li>
             <li><a href="" class="deep-purple-text text-darken-2" id="downloadDataBtn" style="display: none;">Download Results</a></li>
             </ul>
@@ -184,7 +183,7 @@
 
             <div class="row">
                 <div class="col s12 m12 l12 xl12">
-                    <div>Dormant period</div>
+                    <div>Dormant period (slide to enable)</div>
                     <div id="dormantPeriod" class="custom-slider tooltipped" data-position="top" data-tooltip="Period where the basal crop coefficient is equal to Kcmin. Use for vernalization."></div>
                     <div id="dormantPeriodStartSliderValue"></div>
                     <div id="dormantPeriodEndSliderValue"></div>
@@ -192,8 +191,8 @@
             </div>                      
             <div class="row">
                 <div class="col s12 m12 l6 xl6">
-                    <div id="KcMin" class="custom-slider tooltipped" data-position="top" data-tooltip="Minimum basal coefficient for bare soil."></div>
-                    <div id="KcMinSliderValue"></div>
+                    <div id="KcbIni" class="custom-slider tooltipped" data-position="top" data-tooltip="Minimum basal coefficient for bare soil."></div>
+                    <div id="KcbIniSliderValue"></div>
                 </div>
                 <div class="col s12 m12 l6 xl6">
                     <div  class="custom-slider tooltipped" id="KcbFull" data-position="top" data-tooltip="Estimated basal crop coefficient during peak plant growth."></div>
