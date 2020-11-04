@@ -230,9 +230,10 @@ Lollato, R.P. and Edwards, J.T., 2015. Maximum attainable wheat yield and resour
 ## 6.   To-Do List
 
 - [ ] Add figure showing ET partitioning
+- [ ] Add figure of cumulative yield probability
 - [ ] Add table in documentation with soil physical properties for each soil textural class
 - [ ] Add table in documentation with crop stages in terms of thermal units for common crops and maturity groups (e.g. wheat, soybeans, corn)
-- [ ] Add two curated datasets for winter crops and two curated datasets for summer crops containing sporadic observations of rootzone soil moisture and canopy cover
+- [ ] Add curated datasets for winter and summer crops containing periodic observations of rootzone soil moisture and canopy cover. This datasets could be used to calibrate the model and provide new users a starting point.
 
 ## 7.   Model Implementation
 
